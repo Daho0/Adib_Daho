@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAWDIF - الرئيسية</title>
+    <!-- خط Cairo المميز -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+
+
+<style>
+/* ==========================================================================
+   TAWDIF Feed - Master Stylesheet (Black & Blue Glassmorphic UI)
+   ========================================================================== */
+
+/* --- 1. Variables & Global Rules --- */
+:root {
+    --bg-dark: #070b14;
+    --bg-card: rgba(15, 23, 42, 0.65);
+    --primary: #3B82F6;
+    --primary-hover: #2563EB;
+    --accent-primary: #3B82F6;
+    --accent-secondary: #06B6D4;
+    --gradient-accent: linear-gradient(135deg, #3B82F6, #06B6D4);
+    --gradient-insta: linear-gradient(135deg, #EC4899, #8B5CF6);
+    --heart-color: #EC4899;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(59, 130, 246, 0.35);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    --blur: blur(16px);
+    --radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top center, #0f172a 0%, #070b14 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
+    direction: rtl;
+    overflow-x: hidden;
+}
+
+/* --- 2. Top Navbar & Brand --- */
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    background: rgba(7, 11, 20, 0.8);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-right, .nav-left, .nav-center {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Logo Section */
+.brand-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.brand-logo-container:hover {
+    transform: scale(1.03);
+}
+
+.brand-logo-img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+}
+
+.brand-logo-text {
+    font-size: 14px;
+    font-weight: 900;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #60A5FA, #3B82F6, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+    animation: textGlowPulse 2.5s infinite ease-in-out;
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Search Bar */
+.nav-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.nav-search input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 8px 38px 8px 16px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    width: 220px;
+    transition: all 0.3s ease;
+}
+
+.nav-search input:focus {
+    width: 280px;
+    border-color: var(--primary);
+    background: rgba(15, 23, 42, 0.8);
+}
+
+.nav-search i {
+    position: absolute;
+    right: 14px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Nav Center Tabs (Glassmorphic) */
+.nav-center .nav-tab {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-center .nav-tab:hover {
+    background: rgba(15, 23, 42, 0.75) !important;
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.25), 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.nav-center .nav-tab.active {
+    background: rgba(37, 99, 235, 0.25) !important;
+    color: #3b82f6 !important;
+    box-shadow: 0 0 18px rgba(59, 130, 246, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+.nav-center .nav-tab.active:hover {
+    background: rgba(37, 99, 235, 0.4) !important;
+    color: #60a5fa !important;
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 0 22px rgba(59, 130, 246, 0.6) !important;
+}
+
+.nav-center .nav-tab:active {
+    transform: translateY(1px) scale(0.95);
+}
+
+/* Nav Left Buttons (Glassmorphic No-Border) */
+.nav-left .icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-left .icon-btn:hover {
+    background: rgba(15, 23, 42, 0.75) !important;
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.25), 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.nav-left .icon-btn:active {
+    transform: translateY(1px) scale(0.95);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.nav-left .icon-btn .badge-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #ef4444;
+}
+
+.nav-left .icon-btn:has(.fa-facebook-messenger):hover {
+    background: rgba(0, 132, 255, 0.15) !important;
+    box-shadow: 0 0 18px rgba(0, 132, 255, 0.4), 0 6px 18px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* --- 3. Main Layout & Responsive --- */
+.fb-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 680px) 280px;
+    gap: 20px;
+    max-width: 1300px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+@media (max-width: 1024px) {
+    .fb-layout { grid-template-columns: 240px 1fr; }
+    .left-sidebar { display: none; }
+}
+
+@media (max-width: 768px) {
+    .fb-layout { grid-template-columns: 1fr; }
+    .right-sidebar { display: none; }
+}
+
+/* Sidebars Menu */
+.sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover, .menu-item.active {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+}
+
+.menu-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin: 16px 10px 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- 4. Stories Component --- */
+.stories-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    scrollbar-width: none;
+}
+
+.stories-container::-webkit-scrollbar { display: none; }
+
+.story-card {
+    position: relative;
+    min-width: 105px;
+    height: 155px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.story-card:hover { transform: scale(1.03); }
+
+.story-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-avatar {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px;
+    background: var(--gradient-accent);
+    border-radius: 50%;
+}
+
+.story-avatar-inner, .post-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #8B5CF6);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.story-name {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    left: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* --- 5. Create Post Section --- */
+.create-post-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.create-post-top {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#mainPostInput {
+    flex: 1;
+    position: relative !important;
+    z-index: 20 !important;
+    cursor: text !important;
+    pointer-events: auto !important;
+    -webkit-user-select: text !important;
+    user-select: text !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    width: 100%;
+}
+
+#mainPostInput::placeholder { color: #94a3b8 !important; }
+
+#mainPostInput:focus {
+    border-color: #3b82f6 !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.create-post-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+    width: 100%;
+}
+
+.post-actions-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Action Buttons (Image, Video, CV) */
+.post-btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.post-btn-action:hover {
+    background: rgba(15, 23, 42, 0.75);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.post-btn-action:active {
+    transform: translateY(1px) scale(0.97);
+}
+
+/* Submit Post Button */
+.btn-submit-post {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 24px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 12px rgba(59, 130, 246, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    color: #3b82f6;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-submit-post:hover {
+    background: rgba(30, 58, 138, 0.35);
+    border-color: rgba(96, 165, 250, 0.8);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5), 0 0 18px rgba(59, 130, 246, 0.5);
+}
+
+.btn-submit-post:active {
+    transform: translateY(1px) scale(0.96);
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+}
+
+/* --- 6. Post Card & Feed --- */
+.post-card {
+    background: var(--bg-card);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: border-color 0.25s ease;
+}
+
+.post-card:hover {
+    border-color: var(--glass-border-hover);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.post-user-info { display: flex; gap: 10px; align-items: center; }
+
+.post-user-details h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.badge-verified { color: var(--primary); font-size: 12px; }
+
+.post-user-details span { font-size: 11px; color: var(--text-muted); }
+
+.post-body {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin-bottom: 14px;
+    white-space: pre-line;
+}
+
+.post-media {
+    margin: 0 -18px 14px -18px;
+    max-height: 420px;
+    overflow: hidden;
+    background: #000;
+}
+
+.post-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 4px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 10px;
+}
+
+/* Like & Comment Buttons Inside Post */
+.post-footer-actions { display: flex; gap: 8px; }
+
+.post-action-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.post-action-btn:hover {
+    background: rgba(15, 23, 42, 0.7);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.post-action-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.post-action-btn.liked {
+    color: #ec4899 !important;
+    background: rgba(236, 72, 153, 0.12);
+    border-color: rgba(236, 72, 153, 0.4);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.2);
+}
+
+.post-action-btn.liked:hover {
+    background: rgba(236, 72, 153, 0.2);
+    border-color: rgba(236, 72, 153, 0.6);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.35);
+}
+
+/* --- 7. Comments Section --- */
+.comments-section {
+    display: none;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.comments-section.show { display: block; animation: fadeIn 0.2s ease; }
+
+.comment-input-box {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.comment-input-box input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+}
+
+.comment-input-box input:focus { border-color: var(--primary); }
+
+.comment-input-box button {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* --- 8. Widgets & Contacts --- */
+.sponsored-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 16px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.contact-item:hover { background: rgba(255, 255, 255, 0.05); }
+
+.contact-status { position: relative; }
+
+.status-online {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: #10B981;
+    border: 2px solid #070b14;
+    border-radius: 50%;
+}
+
+/* --- 9. Modal Overlay Fix & Animations --- */
+.modal-overlay:not(.show) {
+    display: none !important;
+    pointer-events: none !important;
+}
+
+@keyframes textGlowPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+        opacity: 0.9;
+    }
+    50% {
+        filter: drop-shadow(0 0 16px rgba(6, 182, 212, 0.95)) drop-shadow(0 0 28px rgba(59, 130, 246, 0.8));
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+
+</head>
+<body>
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة توظيف - الرئيسية</title>
+    <!-- خط Cairo و FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ربط ملف الـ CSS الخاص بك هنا -->
+</head>
+<body>
+
+    <!-- 1. Top Navbar -->
+    <header class="top-nav">
+        <div class="nav-right">
+            <a href="index.html" class="brand-logo-container">
+                <img src="111-removebg-preview (1).png" alt="TAWDIF Logo" class="brand-logo-img">
+                <span class="brand-logo-text">توظيف</span>
+            </a>
+            
+            <div class="nav-search">
+                <input type="text" placeholder="بحث في TAWDIF...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+
+        <nav class="nav-center">
+            <a href="#" class="nav-tab active" title="الرئيسية"><i class="fa-solid fa-house"></i></a>
+            <a href="#" class="nav-tab" title="شبكتي"><i class="fa-solid fa-user-group"></i></a>
+            <a href="#" class="nav-tab" title="الوظائف"><i class="fa-solid fa-briefcase"></i></a>
+            <a href="#" class="nav-tab" title="المجموعات"><i class="fa-solid fa-layer-group"></i></a>
+        </nav>
+
+        <div class="nav-left">
+            <button class="icon-btn" title="القائمة"><i class="fa-solid fa-grip"></i></button>
+           <button class="icon-btn" title="الرسائل">
+    <i class="fa-brands fa-facebook-messenger" style="font-size: 17px; color: #0084FF;"></i>
+    <span class="badge-dot"></span>
+</button>
+            <button class="icon-btn" title="الإشعارات"><i class="fa-solid fa-bell"></i></button>
+
+            <a href="edit-profile.html" class="post-user-avatar" id="navAvatar" style="width: 38px; height: 38px; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; overflow: hidden;">A</a>
+        </div>
+    </header>
+
+    <!-- 2. Main Layout Container -->
+    <div class="fb-layout">
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar right-sidebar">
+            <a href="edit-profile.html" class="menu-item active">
+                <div class="post-user-avatar" id="sidebarAvatar" style="width: 32px; height: 32px; font-size: 13px;">A</div>
+                <span id="sidebarUserName">Adib Daho</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <div class="menu-icon"><i class="fa-solid fa-network-wired"></i></div>
+                <span>الشبكة والاتصالات</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <div class="menu-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <span>فرص العمل</span>
+            </a>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Twitter/Facebook Style Create Post Card -->
+            <div class="create-post-card">
+                <div class="create-post-top">
+                    <div class="post-user-avatar" id="createPostAvatar">A</div>
+                    <textarea id="mainPostInput" placeholder="بماذا تفكر؟ شارك فرصة عمل، إنجاز، أو استفسار..." rows="2"></textarea>
+                </div>
+
+                <div class="create-post-bottom">
+                    <!-- حاوية معاينة وتعديل الصورة (تظهر فقط عند اختيار صورة) -->
+                    <div id="mediaPreviewArea" style="display: none; margin-top: 12px; width: 100%;">
+                        
+                        <!-- 1. منطقة عرض الصورة مع شبكة الاقتصاص (Grid) -->
+                        <div id="imagePreviewContainer" style="position: relative; display: flex; justify-content: center; align-items: center; background: #0f172a; border-radius: 12px; overflow: hidden; max-height: 380px; width: 100%; margin: 0 auto; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">
+                            
+                            <!-- الصورة الرئيسية -->
+                            <img id="imagePreview" src="" alt="المعاينة" style="width: 100%; height: 100%; object-fit: contain; transition: transform 0.2s ease, filter 0.2s ease, object-fit 0.3s ease;">
+
+                            <!-- شبكة اقتصاص الحواف (Rule of Thirds Grid) -->
+                            <div id="cropGridOverlay" class="crop-grid" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; border: 1px solid rgba(255, 255, 255, 0.3);">
+                                <div style="position: absolute; top: 33.33%; left: 0; right: 0; height: 1px; background: rgba(255, 255, 255, 0.35);"></div>
+                                <div style="position: absolute; top: 66.66%; left: 0; right: 0; height: 1px; background: rgba(255, 255, 255, 0.35);"></div>
+                                <div style="position: absolute; left: 33.33%; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0.35);"></div>
+                                <div style="position: absolute; left: 66.66%; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0.35);"></div>
+                            </div>
+                            
+                            <!-- زر حذف / إلغاء الصورة -->
+                            <button type="button" onclick="removeSelectedMedia()" style="position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.7); color: #fff; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; z-index: 10;" title="إلغاء الصورة">✕</button>
+                        </div>
+
+                        <!-- 2. شريط التحكم بالأبعاد والتأطير (النسب والتكبير/التصغير) -->
+                        <div style="display: flex; gap: 8px; margin-top: 10px; justify-content: center; align-items: center; flex-wrap: wrap; background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                            <span style="font-size: 11px; color: #94a3b8; font-weight: bold;">الأبعاد:</span>
+                            <button type="button" onclick="setAspectRatio('original')" class="aspect-btn active" id="btn-aspect-original">الأصلي</button>
+                            <button type="button" onclick="setAspectRatio('1:1')" class="aspect-btn" id="btn-aspect-1:1">1:1 مربع</button>
+                            <button type="button" onclick="setAspectRatio('4:5')" class="aspect-btn" id="btn-aspect-4:5">4:5 عمودي</button>
+                            <button type="button" onclick="setAspectRatio('16:9')" class="aspect-btn" id="btn-aspect-16:9">16:9 عريض</button>
+                            
+                            <span style="font-size: 11px; color: #94a3b8; font-weight: bold; margin-right: 8px; margin-left: 4px;">التأطير:</span>
+                            <button type="button" onclick="adjustZoom(0.1)" class="aspect-btn" title="تكبير">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </button>
+                            <button type="button" onclick="adjustZoom(-0.1)" class="aspect-btn" title="تصغير">
+                                <i class="fa-solid fa-magnifying-glass-minus"></i>
+                            </button>
+                        </div>
+
+                        <!-- 3. شريط أدوات التدوير والفلاتر -->
+                        <div style="display: flex; gap: 10px; margin-top: 8px; justify-content: center; flex-wrap: wrap;">
+                            <button type="button" onclick="rotateImage()" style="padding: 6px 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; color: #fff; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-rotate-right" style="color: #3B82F6;"></i> تدويـر
+                            </button>
+                            <button type="button" onclick="cycleImageFilter()" style="padding: 6px 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; color: #fff; cursor: pointer; font-size: 12px; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color: #F59E0B;"></i> فلتر: <span id="filterName" style="font-weight: bold; color: #38BDF8;">عادي</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 4. شريط الأزرار السفلي (أزرار الرفع + زر النشر) -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 12px; width: 100%; margin-top: 12px;">
+                        
+                       <div class="create-post-bottom" style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+    <div class="post-actions-group" style="display: flex; gap: 8px;">
+        <button type="button" class="post-btn-action"><i class="fa-solid fa-image" style="color: #10B981;"></i> صورة</button>
+        <button type="button" class="post-btn-action"><i class="fa-solid fa-video" style="color: #EF4444;"></i> فيديو</button>
+        <button type="button" class="post-btn-action"><i class="fa-solid fa-file-pdf" style="color: #3B82F6;"></i> CV</button>
+    </div>
+
+                            <!-- حقول رفع الملفات المخفية -->
+                            <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImagePreview(event)">
+                            <input type="file" id="videoInput" accept="video/*" style="display: none;">
+                            <input type="file" id="cvInput" accept=".pdf,.doc,.docx" style="display: none;">
+                        
+
+                        <!-- زر النشر الرئيسي -->
+                       <button type="button" id="mainPublishBtn" class="btn-submit-post">نشر</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Feed Posts Container -->
+            <div id="postsContainer">
+                <!-- سيتم توليد المنشورات ديناميكياً عبر الجافاسكربت هنا -->
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
+
+
+<script>
+
+    <!-- Script قراءة البيانات وتطوير التفاعلية -->
+  
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. مفاتيح التخزين الموحدة
+    const KEYS = {
+        USER: 'tawdif_current_user',
+        POSTS: 'tawdif_posts'
+    };
+
+    // 2. معالجة الأمان لحماية الكود من خطأ حظر LocalStorage
+    const safeStorage = {
+        get: (key, fallback) => {
+            try {
+                const item = localStorage.getItem(key);
+                return item ? JSON.parse(item) : fallback;
+            } catch (e) {
+                console.warn(`[LocalStorage Read Warning]`, e);
+                return fallback;
+            }
+        },
+        set: (key, value) => {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+            } catch (e) {
+                console.warn(`[LocalStorage Write Warning]`, e);
+            }
+        }
+    };
+
+    // 3. جلب بيانات المستخدم وتحديث الأفاتار في جميع الأماكن
+    const currentUser = safeStorage.get(KEYS.USER, { fullName: 'أديب دحو' });
+    const userName = currentUser.fullName || 'مستخدم';
+    const firstLetter = userName.charAt(0).toUpperCase();
+
+    const updateAvatarElement = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (currentUser.avatarUrl) {
+            el.innerHTML = `<img src="${currentUser.avatarUrl}" alt="Avatar" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+        } else {
+            el.textContent = firstLetter;
+        }
+    };
+
+    ['navAvatar', 'topNavAvatar', 'sidebarUserAvatar', 'sidebarAvatar', 'createPostAvatar'].forEach(updateAvatarElement);
+
+    const sidebarUserName = document.getElementById('sidebarUserName');
+    if (sidebarUserName) sidebarUserName.textContent = userName;
+
+    // 4. قاعدة البيانات الموحدة للمنشورات
+    const defaultPosts = [
+        {
+            id: 'post_default_1',
+            author: 'منصة توظيف TAWDIF',
+            avatar: 'T',
+            time: 'منذ 2 ساعة',
+            content: 'مرحباً بكم في الواجهة الجديدة لمنصة TAWDIF! 🚀 تم تحديث التفاعلات لتصبح أكثر سرعة.',
+            likes: 12,
+            isLiked: false,
+            comments: [
+                { user: 'أحمد', text: 'تصميم رائع جداً!' }
+            ]
+        }
+    ];
+
+    let rawPosts = safeStorage.get(KEYS.POSTS, defaultPosts);
+
+    // تنظيف البيانات والتأكد من صحة الحقول
+    let posts = rawPosts.map(p => ({
+        ...p,
+        likes: (typeof p.likes === 'number' && !isNaN(p.likes)) ? p.likes : 0,
+        isLiked: Boolean(p.isLiked),
+        comments: Array.isArray(p.comments) ? p.comments : []
+    }));
+
+    function savePosts() {
+        safeStorage.set(KEYS.POSTS, posts);
+    }
+
+    // تأثير النبض الخاطف للإعجاب
+    function triggerPulseAnimation(btn) {
+        btn.style.transform = 'scale(1.2)';
+        btn.style.transition = 'transform 0.12s ease-in-out';
+        setTimeout(() => {
+            btn.style.transform = 'scale(1)';
+        }, 120);
+    }
+
+    // 5. دالة رسم المنشورات ديناميكياً والتفاعل معها
+    function renderPosts() {
+        const container = document.getElementById('postsContainer');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        posts.forEach((post, index) => {
+            const postEl = document.createElement('div');
+            postEl.className = 'post-card';
+            postEl.setAttribute('data-post-id', post.id || `post_${index}`);
+
+            const avatarHTML = (post.avatar && (post.avatar.startsWith('http') || post.avatar.startsWith('data:')))
+                ? `<img src="${post.avatar}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`
+                : (post.avatar || firstLetter);
+
+            postEl.innerHTML = `
+                <div class="post-header">
+                    <div class="post-user-info" style="display:flex; align-items:center; gap:10px;">
+                        <div class="post-user-avatar" style="width:40px; height:40px; border-radius:50%; background:#2563eb; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:bold; overflow:hidden;">${avatarHTML}</div>
+                        <div>
+                            <h4 style="font-size:14px; font-weight:700; margin:0;">${post.author}</h4>
+                            <span style="font-size:11px; color:var(--text-muted, #888);">${post.time}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-body" style="margin:12px 0; line-height:1.6; font-size:14px;">${post.content}</div>
+                <div class="post-stats" style="display:flex; gap:15px; font-size:12px; color:var(--text-muted, #888); border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px; margin-bottom:8px;">
+                    <span><i class="fa-solid fa-heart" style="color:#EC4899;"></i> <span id="like-count-${index}">${post.likes}</span> إعجاب</span>
+                    <span><span id="comment-count-${index}">${post.comments.length}</span> تعليق</span>
+                </div>
+                <div class="post-footer-actions" style="display:flex; gap:10px;">
+                   <button class="post-action-btn ${post.isLiked ? 'liked' : ''}" id="like-btn-${index}" style="color: ${post.isLiked ? '#EC4899' : 'var(--text-muted)'}; cursor:pointer;">
+                        <i class="fa-solid fa-heart"></i> <span id="like-text-${index}">${post.isLiked ? 'أعجبني' : 'إعجاب'}</span>
+                   </button>
+                    <button class="post-action-btn" id="comment-btn-${index}" style="cursor:pointer;">
+                        <i class="fa-regular fa-comment"></i> تعليق
+                    </button>
+                </div>
+                <div class="comments-section" id="comments-section-${index}">
+                    <div class="comment-input-box" style="margin-top:10px; display:flex; gap:8px;">
+                        <input type="text" id="comment-input-${index}" placeholder="اكتب تعليقاً واضغط Enter..." style="flex:1; padding:8px 12px; border-radius:6px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); color:#fff;">
+                        <button id="comment-submit-${index}" style="padding:6px 14px; border-radius:6px; background:#2563eb; color:#fff; border:none; cursor:pointer;">إرسال</button>
+                    </div>
+                    <div id="comments-list-${index}" style="margin-top:10px;">
+                        ${post.comments.map(c => `
+                            <div class="comment-item" style="margin-top: 8px;">
+                                <div class="comment-bubble" style="background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px;">
+                                    <div class="comment-user" style="font-weight:bold; font-size:12px; color:var(--primary, #3B82F6);">${c.user}</div>
+                                    <div style="font-size:13px; color:#f1f5f9;">${c.text}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(postEl);
+
+            // أ) تفاعل الإعجاب بلمسة النبض الخاطف
+            const likeBtn = postEl.querySelector(`#like-btn-${index}`);
+            likeBtn.onclick = (e) => {
+                e.preventDefault();
+                post.isLiked = !post.isLiked;
+                post.likes = post.isLiked ? post.likes + 1 : Math.max(0, post.likes - 1);
+
+                savePosts();
+
+                const likeCountEl = document.getElementById(`like-count-${index}`);
+                const likeTextEl = document.getElementById(`like-text-${index}`);
+                if (likeCountEl) likeCountEl.textContent = post.likes;
+                if (likeTextEl) likeTextEl.textContent = post.isLiked ? 'أعجبني' : 'إعجاب';
+
+                likeBtn.style.color = post.isLiked ? '#EC4899' : 'var(--text-muted)';
+                likeBtn.classList.toggle('liked', post.isLiked);
+
+                triggerPulseAnimation(likeBtn);
+            };
+
+            // ب) فتح/إغلاق التعليقات
+            const commentBtn = postEl.querySelector(`#comment-btn-${index}`);
+            const commentsSection = postEl.querySelector(`#comments-section-${index}`);
+            commentBtn.onclick = () => {
+                commentsSection.classList.toggle('show');
+            };
+
+            // ج) إضافة تعليق بدون Reload
+            const commentInput = postEl.querySelector(`#comment-input-${index}`);
+            const commentSubmitBtn = postEl.querySelector(`#comment-submit-${index}`);
+            const commentsList = postEl.querySelector(`#comments-list-${index}`);
+            const commentCountEl = postEl.querySelector(`#comment-count-${index}`);
+
+            const executeAddComment = () => {
+                const text = commentInput.value.trim();
+                if (text !== '') {
+                    const newComment = { user: userName, text: text };
+                    post.comments.push(newComment);
+                    savePosts();
+
+                    const commentEl = document.createElement('div');
+                    commentEl.className = 'comment-item';
+                    commentEl.style.marginTop = '8px';
+                    commentEl.innerHTML = `
+                        <div class="comment-bubble" style="background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px;">
+                            <div class="comment-user" style="font-weight:bold; font-size:12px; color:var(--primary, #3B82F6);">${newComment.user}</div>
+                            <div style="font-size:13px; color:#f1f5f9;">${newComment.text}</div>
+                        </div>
+                    `;
+                    commentsList.appendChild(commentEl);
+
+                    if (commentCountEl) commentCountEl.textContent = post.comments.length;
+                    commentInput.value = '';
+                }
+            };
+
+            commentSubmitBtn.onclick = executeAddComment;
+
+            commentInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    executeAddComment();
+                }
+            });
+        });
+    }
+
+    // 6. إضافة منشور جديد
+    function addNewPost(content) {
+        posts.unshift({
+            id: `post_custom_${Date.now()}`,
+            author: userName,
+            avatar: currentUser.avatarUrl || firstLetter,
+            time: 'الآن',
+            content: content,
+            likes: 0,
+            isLiked: false,
+            comments: []
+        });
+        savePosts();
+        renderPosts();
+    }
+
+    // 7. النشر من النافذة المنبثقة (Modal)
+    const modal = document.getElementById('postModal');
+    const openModalBtn = document.getElementById('openPostModal');
+    const closeModalBtn = document.getElementById('closePostModal');
+    const submitPostBtn = document.getElementById('submitPostBtn');
+    const postInputModal = document.getElementById('postContentInput');
+
+    if (openModalBtn && modal) openModalBtn.onclick = () => modal.classList.add('show');
+    if (closeModalBtn && modal) closeModalBtn.onclick = () => modal.classList.remove('show');
+
+    if (submitPostBtn && postInputModal) {
+        submitPostBtn.onclick = () => {
+            const content = postInputModal.value.trim();
+            if (content !== '') {
+                addNewPost(content);
+                postInputModal.value = '';
+                if (modal) modal.classList.remove('show');
+            }
+        };
+    }
+
+    // 8. النشر المباشر من الواجهة الرئيسية
+    const mainPublishBtn = document.getElementById('mainPublishBtn');
+    const mainPostInput = document.getElementById('mainPostInput');
+    if (mainPublishBtn && mainPostInput) {
+        mainPublishBtn.onclick = (e) => {
+            e.preventDefault();
+            const content = mainPostInput.value.trim();
+            if (content !== '') {
+                addNewPost(content);
+                mainPostInput.value = '';
+            }
+        };
+    }
+
+    // 9. القائمة المنسدلة للإشعارات
+    const notifBtn = document.getElementById('notifBtn');
+    const notifDropdown = document.getElementById('notifDropdown');
+
+    if (notifBtn && notifDropdown) {
+        notifBtn.onclick = (e) => {
+            e.stopPropagation();
+            notifDropdown.classList.toggle('show');
+        };
+
+        document.onclick = () => {
+            if (notifDropdown.classList.contains('show')) {
+                notifDropdown.classList.remove('show');
+            }
+        };
+    }
+
+    // تشغيل النظام
+    renderPosts();
+});
+
+// 10. تسجيل الخروج
+function logout() {
+    try {
+        localStorage.removeItem('tawdif_current_user');
+    } catch (e) {
+        console.warn(e);
+    }
+    window.location.href = 'login.html';
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
