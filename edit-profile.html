@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعديل الملف الشخصي - منصة TAWDIF</title>
+    <!-- خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #070b14;
+            --bg-card: rgba(15, 23, 42, 0.65);
+            --primary: #3B82F6;
+            --primary-hover: #2563EB;
+            --accent-secondary: #06B6D4;
+            --gradient-accent: linear-gradient(135deg, #3B82F6, #06B6D4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-hover: rgba(59, 130, 246, 0.35);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --blur: blur(16px);
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top center, #0f172a 0%, #070b14 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* شريط التنقل العلوي الزجاجي */
+        .app-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 11, 20, 0.8);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 12px 24px;
+        }
+
+        .navbar-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .navbar-brand span { color: var(--primary); }
+
+        .nav-btn-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--blur);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn-link:hover {
+            color: #fff;
+            border-color: var(--glass-border-hover);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* حاوية النموذج */
+        .edit-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-radius: var(--radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 18px;
+            margin-bottom: 25px;
+        }
+
+        .card-header i {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .avatar-edit-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            padding: 3px;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .avatar-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .input-style {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--glass-border);
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            backdrop-filter: var(--blur);
+            transition: all 0.3s ease;
+        }
+
+        .input-style:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+        }
+
+        textarea.input-style {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
+        }
+
+        .save-btn {
+            background: var(--gradient-accent);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* رسالة التنبيه الزجاجية */
+        .toast-msg {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 14px;
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>/* --- Brand Logo Container & Glowing Pulse Animation --- */
+.brand-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.brand-logo-container:hover {
+    transform: scale(1.03);
+}
+
+.brand-logo-img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+}
+
+.brand-logo-text {
+    font-size: 14px;
+    font-weight: 900;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #60A5FA, #3B82F6, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+    animation: textGlowPulse 2.5s infinite ease-in-out;
+}
+
+/* حركة النبض الضوئي لكلمة توظيف */
+@keyframes textGlowPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
+        opacity: 0.9;
+    }
+    50% {
+        filter: drop-shadow(0 0 16px rgba(6, 182, 212, 0.95)) drop-shadow(0 0 28px rgba(59, 130, 246, 0.8));
+        opacity: 1;
+    }
+}</style>
+
+
+
+
+
+
+
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="app-navbar">
+          <div class="nav-right">
+    <a href="index.html" class="brand-logo-container">
+        <!-- أضف مسار صورة اللوجو المعتمدة في صفحة login هنا -->
+        <img src="111-removebg-preview (1).png" alt="TAWDIF Logo" class="brand-logo-img">
+        <span class="brand-logo-text">توظيف</span>
+    </a>
+   
+</div>
+    </header>
+
+    <!-- حاوية النموذج -->
+    <div class="edit-container">
+        <div class="glass-card">
+            <div class="card-header">
+                <i class="fa-solid fa-user-gear"></i>
+                <div>
+                    <h2 style="font-size: 18px; color: #fff;">إعدادات الملف الشخصي</h2>
+                    <span style="font-size: 12px; color: var(--text-muted);">قم بتحديث معلوماتك المهنية وشخصيتك الرقمية</span>
+                </div>
+            </div>
+
+            <form id="editProfileForm">
+                <!-- قسم تغيير الصورة الشخصية -->
+                <div class="avatar-edit-section">
+                    <div class="avatar-preview">
+                        <div class="avatar-inner" id="avatarDisplay">أ</div>
+                    </div>
+                    <label class="nav-btn-link" style="cursor: pointer; font-size: 12.5px;">
+                        <i class="fa-solid fa-camera"></i> تغيير الصورة
+                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                    </label>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" id="fullNameInput" class="input-style" placeholder="مثال: أديب دحو" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>اسم المستخدم (Username)</label>
+                        <input type="text" id="usernameInput" class="input-style" placeholder="مثال: adib_dev" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>المسمى الوظيفي / التخصص</label>
+                        <input type="text" id="jobTitleInput" class="input-style" placeholder="مثال: مطور واجهات أمامي وباحث عن عمل">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>النبذة التعريفية (Bio)</label>
+                        <textarea id="bioInput" class="input-style" placeholder="اكتب نبذة مختصرة عن خبراتك وطموحاتك..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>المهارات (افصل بينها بفواصل)</label>
+                        <input type="text" id="skillsInput" class="input-style" placeholder="HTML, CSS, JavaScript, React, UI/UX">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="index.html" class="cancel-btn">إلغاء</a>
+                    <button type="submit" class="save-btn">حفظ التغييرات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastMsg" class="toast-msg">
+        <i class="fa-solid fa-circle-check" style="margin-left: 8px;"></i> تم حفظ التغييرات بنجاح!
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const avatarDisplay = document.getElementById('avatarDisplay');
+            const avatarInput = document.getElementById('avatarInput');
+            const fullNameInput = document.getElementById('fullNameInput');
+            const usernameInput = document.getElementById('usernameInput');
+            const jobTitleInput = document.getElementById('jobTitleInput');
+            const bioInput = document.getElementById('bioInput');
+            const skillsInput = document.getElementById('skillsInput');
+            const editForm = document.getElementById('editProfileForm');
+            const toastMsg = document.getElementById('toastMsg');
+
+            let currentAvatarData = null;
+
+            // 1. جلب البيانات المسجلة سابقاً من LocalStorage وتعبئتها في الحقول
+            try {
+                const currentUserData = localStorage.getItem('tawdif_current_user');
+                if (currentUserData) {
+                    const user = JSON.parse(currentUserData);
+                    fullNameInput.value = user.fullName || '';
+                    usernameInput.value = user.identifier ? user.identifier.replace('@', '') : '';
+                    jobTitleInput.value = user.jobTitle || '';
+                    bioInput.value = user.bio || '';
+                    skillsInput.value = user.skills || '';
+
+                    if (user.avatarUrl) {
+                        currentAvatarData = user.avatarUrl;
+                        avatarDisplay.innerHTML = `<img src="${user.avatarUrl}" alt="Avatar">`;
+                    } else if (user.fullName) {
+                        avatarDisplay.textContent = user.fullName.charAt(0);
+                    }
+                }
+            } catch (e) {
+                console.error("خطأ في تحميل البيانات من LocalStorage", e);
+            }
+
+            // 2. معالجة اختيار صورة جديدة وتحويلها إلى Base64
+            avatarInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (uploadEvent) => {
+                        currentAvatarData = uploadEvent.target.result;
+                        avatarDisplay.innerHTML = `<img src="${currentAvatarData}" alt="Avatar">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // 3. حفظ التغييرات في التخزين المحلي والتوجه للصفحة الرئيسية
+            editForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const updatedUser = {
+                    fullName: fullNameInput.value.trim(),
+                    identifier: usernameInput.value.trim().startsWith('@') ? usernameInput.value.trim() : '@' + usernameInput.value.trim(),
+                    jobTitle: jobTitleInput.value.trim(),
+                    bio: bioInput.value.trim(),
+                    skills: skillsInput.value.trim(),
+                    avatarUrl: currentAvatarData
+                };
+
+                localStorage.setItem('tawdif_current_user', JSON.stringify(updatedUser));
+                
+                // إظهار تنبيه النجاح الزجاجي ثم العودة للرئيسية
+                toastMsg.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1200);
+            });
+        });
+    </script>
+</body>
+</html>

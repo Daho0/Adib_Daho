@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة توظيف TAWDIF - الإشعارات</title>
+    <!-- خط Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #05030a;
+            --card-bg: rgba(14, 8, 24, 0.78);
+            --accent-violet: #a855f7;
+            --accent-purple: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background: radial-gradient(circle at 50% 10%, #1a0b2e 0%, #05030a 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes borderGlowPulse {
+            0%, 100% {
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+            50% {
+                border-color: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 18px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards, borderGlowPulse 6s infinite ease-in-out;
+            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease;
+        }
+
+        .app-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 3, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 12px 24px;
+        }
+
+        .navbar-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .navbar-brand span { color: var(--accent-violet); }
+
+        .navbar-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .navbar-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .navbar-links a:hover, .navbar-links a.active {
+            color: var(--accent-violet);
+            transform: translateY(-2px);
+        }
+
+        .notifications-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .notifications-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+        }
+
+        .notifications-header h2 {
+            font-size: 18px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notifications-header h2 i {
+            color: var(--accent-violet);
+        }
+
+        .mark-all-read {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mark-all-read:hover {
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .notification-card {
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            border-radius: 14px;
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-glass);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .notification-card.unread {
+            border-color: rgba(168, 85, 247, 0.4);
+            background: rgba(168, 85, 247, 0.05);
+        }
+
+        .notification-card.unread::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-violet);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-violet);
+        }
+
+        .notif-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-violet);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .notif-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .notif-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .notif-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .notif-time {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .notifications-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+  <header class="app-navbar">
+    <div class="navbar-container">
+        <a href="index.html" class="navbar-brand">
+            <i class="fa-solid fa-briefcase"></i> توظيف <span>TAWDIF</span>
+        </a>
+        <ul class="navbar-links">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
+            <li><a href="notifications.html" class="active"><i class="fa-solid fa-bell"></i> الإشعارات</a></li>
+            <li><a href="login.html" id="logoutBtn" style="color: #f87171;"><i class="fa-solid fa-right-from-bracket"></i> خروج</a></li>
+        </ul>
+    </div>
+</header>
+
+    <!-- محتوى الإشعارات -->
+    <div class="notifications-container">
+        
+        <div class="glass-card notifications-header">
+            <h2><i class="fa-solid fa-bell"></i> الإشعارات والأنشطة المهنية</h2>
+            <button id="markAllReadBtn" class="mark-all-read"><i class="fa-solid fa-check-double"></i> تعيين الكل كمقروء</button>
+        </div>
+
+        <div class="notifications-list" id="notificationsList">
+            <!-- إشعار 1 (غير مقروء) -->
+            <div class="glass-card notification-card unread">
+                <div class="notif-icon-box">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="notif-content">
+                    <div class="notif-title">إعجاب جديد بمنشورك</div>
+                    <div class="notif-desc">أعجب أحدهم بمنشورك التقني حول تطوير واجهات المستخدم في منصة توظيف TAWDIF.</div>
+                    <div class="notif-time">منذ 15 دقيقة</div>
+                </div>
+            </div>
+
+            <!-- إشعار 2 (غير مقروء) -->
+            <div class="glass-card notification-card unread">
+                <div class="notif-icon-box">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </div>
+                <div class="notif-content">
+                    <div class="notif-title">تعليق جديد على عرض العمل</div>
+                    <div class="notif-desc">أضاف مطور واجهات أمامية تعليقاً استفسارياً بخصوص شروط قبول الوظيفة.</div>
+                    <div class="notif-time">منذ ساعة واحدة</div>
+                </div>
+            </div>
+
+            <!-- إشعار 3 (مقروء) -->
+            <div class="glass-card notification-card">
+                <div class="notif-icon-box" style="background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); color: #3b82f6;">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="notif-content">
+                    <div class="notif-title">متابع جديد انضم إليك</div>
+                    <div class="notif-desc">بدأ مسؤول موارد بشرية في متابعة ملفك المهني على المنصة.</div>
+                    <div class="notif-time">منذ 3 ساعات</div>
+                </div>
+            </div>
+
+            <!-- إشعار 4 (مقروء) -->
+            <div class="glass-card notification-card">
+                <div class="notif-icon-box" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #10b981;">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="notif-content">
+                    <div class="notif-title">تم نشر عرض العمل بنجاح</div>
+                    <div class="notif-desc">عرض العمل الخاص بك أصبح متاحاً الآن في التغذية الرئيسية لجميع الباحثين.</div>
+                    <div class="notif-time">أمس</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- السكربت التفاعلي -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const markAllReadBtn = document.getElementById('markAllReadBtn');
+            const notificationsList = document.getElementById('notificationsList');
+
+            // وظيفة تعيين الكل كمقروء
+            if (markAllReadBtn) {
+                markAllReadBtn.addEventListener('click', () => {
+                    const unreadCards = notificationsList.querySelectorAll('.notification-card.unread');
+                    unreadCards.forEach(card => {
+                        card.classList.remove('unread');
+                    });
+                });
+            }
+
+            // جعل الإشعار يصبح مقروءاً فور الضغط عليه
+            notificationsList.addEventListener('click', (e) => {
+                const card = e.target.closest('.notification-card');
+                if (card && card.classList.contains('unread')) {
+                    card.classList.remove('unread');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
